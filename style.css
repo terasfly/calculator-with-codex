@@ -176,6 +176,11 @@ body{
   color: hsl(220 10% 35%);
 }
 
+.keys .key.digit-seven {
+  background: linear-gradient(180deg, hsl(0 80% 68%), hsl(0 72% 54%));
+  color: #fff;
+}
+
 #equals{
   position: relative;
   overflow: hidden;

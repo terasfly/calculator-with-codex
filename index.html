@@ -3,41 +3,56 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css">
     <title>Calculator</title>
 </head>
 <body>
-<div class="calculator">
-<div class="header">
-<div class="screen" id="display"></div>
-</div>
+    <div class="leaf-field" aria-hidden="true">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+    <div class="calculator">
+        <div class="header">
+            <div class="screen" id="display"></div>
+        </div>
 
+        <div class="keys">
+            <div class="key memory" id="clear">AC</div>
+            <div class="key operator" id="divide">÷</div>
+            <div class="key operator" id="times">×</div>
+            <div class="key operator">−</div>
 
-<div class="keys">
-  <div class="key memory" id="clear">AC</div>
-  <div class="key operator" id="divide">÷</div>
-  <div class="key operator" id="times">×</div>
-  <div class="key operator">−</div>
+            <div class="key digit digit-seven">7</div>
+            <div class="key digit">8</div>
+            <div class="key digit">9</div>
+            <div class="key operator" id="plus">+</div>
 
-  <div class="key digit digit-seven">7</div>
-  <div class="key digit">8</div>
-  <div class="key digit">9</div>
-  <div class="key operator" id="plus">+</div>
+            <div class="key digit">4</div>
+            <div class="key digit">5</div>
+            <div class="key digit">6</div>
+            <div class="key operator" id="equals">=</div>
 
-  <div class="key digit">4</div>
-  <div class="key digit">5</div>
-  <div class="key digit">6</div>
-  <div class="key operator" id="equals">=</div>
+            <div class="key digit">1</div>
+            <div class="key digit">2</div>
+            <div class="key digit">3</div>
 
-  <div class="key digit">1</div>
-  <div class="key digit">2</div>
-  <div class="key digit">3</div>
+            <div class="key digit zero">0</div>
+            <div class="key time-display" id="clock"></div>
+            <div class="key digit">.</div>
+        </div>
 
-  <div class="key digit zero">0</div>
-  <div class="key digit">.</div>
-</div>
-
-</div>
-<script src="main.js"></script>
+        <div class="footer-glow" aria-hidden="true"></div>
+    </div>
+    <script src="main.js"></script>
 </body>
 </html>

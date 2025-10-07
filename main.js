@@ -1,6 +1,14 @@
 // main.js
 (() => {
   const display = document.getElementById("display");
+  const clockDisplay = document.getElementById("clock");
+  const clockFormatter = clockDisplay
+    ? new Intl.DateTimeFormat(undefined, {
+        hour: "2-digit",
+        minute: "2-digit",
+        second: "2-digit",
+      })
+    : null;
   const keys = document.querySelector(".keys");
 
   let current = "0";
@@ -23,6 +31,14 @@
 
   function updateDisplay(value = current) {
     display.textContent = format(value);
+  }
+
+  function updateClock() {
+    if (!clockDisplay) return;
+    const now = new Date();
+    clockDisplay.textContent = clockFormatter
+      ? clockFormatter.format(now)
+      : now.toLocaleTimeString();
   }
 
   function clearAll() {
@@ -142,6 +158,7 @@
   keys.addEventListener("pointerdown", (e) => {
     const key = e.target.closest(".key");
     if (!key) return;
+    if (key.classList.contains("time-display")) return;
     // ant touch – neleisti generuoti papildomo mouse įvykio
     if (e.pointerType === "touch") e.preventDefault();
     activeKey = key;
@@ -151,6 +168,7 @@
   keys.addEventListener("pointerup", (e) => {
     const key = e.target.closest(".key");
     if (!key) return;
+    if (key.classList.contains("time-display")) return;
     if (e.pointerType === "touch") e.preventDefault();
 
     // jei paleidom kitur nei paspaudėm – vis tiek vykdom to, ant kurio paleista
@@ -227,4 +245,6 @@
 
   // Start
   updateDisplay();
+  updateClock();
+  setInterval(updateClock, 1000);
 })();

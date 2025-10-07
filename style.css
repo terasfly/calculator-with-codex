@@ -166,7 +166,7 @@ body{
   cursor: default;
   background: var(--screen-bg);
   color: var(--text-strong);
-  box-shadow: var(--shadow-inner), 0 1px 0 rgb(255 255 255 / .6) inset;
+
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
   pointer-events: none;
@@ -183,9 +183,7 @@ body{
 }
 
 .key.digit-seven.is-pressed {
-  background: linear-gradient(180deg, hsl(12 88% 60%), hsl(8 78% 48%));
-  color: #fff;
-  box-shadow: 0 6px 12px -6px rgb(108 34 18 / .55), var(--shadow-inner);
+
 }
 
 #equals{

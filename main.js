@@ -1,6 +1,14 @@
 // main.js
 (() => {
   const display = document.getElementById("display");
+  const clockDisplay = document.getElementById("clock");
+  const clockFormatter = clockDisplay
+    ? new Intl.DateTimeFormat(undefined, {
+        hour: "2-digit",
+        minute: "2-digit",
+        second: "2-digit",
+      })
+    : null;
   const keys = document.querySelector(".keys");
 
   let current = "0";
@@ -23,6 +31,14 @@
 
   function updateDisplay(value = current) {
     display.textContent = format(value);
+  }
+
+  function updateClock() {
+    if (!clockDisplay) return;
+    const now = new Date();
+    clockDisplay.textContent = clockFormatter
+      ? clockFormatter.format(now)
+      : now.toLocaleTimeString();
   }
 
   function clearAll() {
@@ -142,24 +158,43 @@
   keys.addEventListener("pointerdown", (e) => {
     const key = e.target.closest(".key");
     if (!key) return;
+    if (key.classList.contains("time-display")) return;
     // ant touch – neleisti generuoti papildomo mouse įvykio
     if (e.pointerType === "touch") e.preventDefault();
     activeKey = key;
+    key.classList.add("is-pressed");
     flashKey(key);
   }, { passive: false });
 
   keys.addEventListener("pointerup", (e) => {
     const key = e.target.closest(".key");
-    if (!key) return;
+    if (activeKey) activeKey.classList.remove("is-pressed");
+
+    if (!key || key.classList.contains("time-display")) {
+      activeKey = null;
+      return;
+    }
+
     if (e.pointerType === "touch") e.preventDefault();
 
     // jei paleidom kitur nei paspaudėm – vis tiek vykdom to, ant kurio paleista
+    key.classList.remove("is-pressed");
     handleKeyAction(key);
     activeKey = null;
   }, { passive: false });
 
+  window.addEventListener("pointerup", (e) => {
+    if (!keys.contains(e.target)) {
+      if (activeKey) activeKey.classList.remove("is-pressed");
+      activeKey = null;
+    }
+  });
+
   // „nutraukto“ paspaudimo atvejis – atšaukiam aktyvų
-  keys.addEventListener("pointercancel", () => { activeKey = null; });
+  keys.addEventListener("pointercancel", () => {
+    if (activeKey) activeKey.classList.remove("is-pressed");
+    activeKey = null;
+  });
 
   function handleKeyAction(keyEl) {
     const text = keyEl.textContent.trim();
@@ -206,6 +241,11 @@
 
     if (btnToFlash) flashKey(btnToFlash);
 
+    if (key === "7") {
+      const sevenKey = findKeyByLabel("7");
+      if (sevenKey) sevenKey.classList.add("is-pressed");
+    }
+
     if ((key >= "0" && key <= "9") || key === ".") {
       inputDigit(key);
       return;
@@ -225,6 +265,15 @@
     }
   });
 
+  window.addEventListener("keyup", (e) => {
+    if (e.key === "7") {
+      const sevenKey = findKeyByLabel("7");
+      if (sevenKey) sevenKey.classList.remove("is-pressed");
+    }
+  });
+
   // Start
   updateDisplay();
+  updateClock();
+  setInterval(updateClock, 1000);
 })();

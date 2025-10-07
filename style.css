@@ -166,6 +166,22 @@ body{
   grid-column: span 2;
 }
 
+.key.time-display {
+  grid-column: span 4;
+  justify-content: flex-end;
+  padding: 0 16px;
+  font-size: 22px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  cursor: default;
+  background: var(--screen-bg);
+  color: var(--text-strong);
+  box-shadow: var(--shadow-inner), 0 1px 0 #fff inset;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  pointer-events: none;
+}
+
 #clear{
   background: linear-gradient(180deg, hsl(350 80% 90%), #fff);
   box-shadow: 0 8px 16px -6px rgb(255 90 120 / .25);
@@ -176,9 +192,10 @@ body{
   color: hsl(220 10% 35%);
 }
 
-.keys .key.digit-seven {
+.key.digit-seven.is-pressed {
   background: linear-gradient(180deg, hsl(0 80% 68%), hsl(0 72% 54%));
   color: #fff;
+  box-shadow: 0 6px 10px -6px rgb(0 0 0 / .18), var(--shadow-inner);
 }
 
 #equals{

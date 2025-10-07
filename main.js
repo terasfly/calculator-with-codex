@@ -168,12 +168,6 @@
 
   keys.addEventListener("pointerup", (e) => {
     const key = e.target.closest(".key");
-    if (activeKey) activeKey.classList.remove("is-pressed");
-
-    if (!key || key.classList.contains("time-display")) {
-      activeKey = null;
-      return;
-    }
 
     if (e.pointerType === "touch") e.preventDefault();
 

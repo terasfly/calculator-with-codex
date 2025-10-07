@@ -169,6 +169,7 @@
   keys.addEventListener("pointerup", (e) => {
     const key = e.target.closest(".key");
 
+
     if (e.pointerType === "touch") e.preventDefault();
 
     // jei paleidom kitur nei paspaudėm – vis tiek vykdom to, ant kurio paleista
